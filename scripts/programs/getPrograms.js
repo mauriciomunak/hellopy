@@ -3,7 +3,6 @@
  */
 let detectDeleteButtons = function () {
   let deletedbuttons = document.getElementsByClassName("deletedprogram");
-  console.log(deletedbuttons);
   for (const key in deletedbuttons) {
     if (Object.hasOwnProperty.call(deletedbuttons, key)) {
       const buttondel = deletedbuttons[key];
@@ -59,7 +58,7 @@ let printProgram = function (program) {
         </div>
         <div class="card-body">
             <h5 class="card-title mb-3">ID del grupo o número: ${
-              program[2]
+              program[3]
             }</h5>
             <p class="card-text m-0"><strong>Mensaje:</strong> ${program[6]}</p>
             <p class="card-text m-0"><strong>Día:</strong> ${
@@ -85,7 +84,7 @@ let printProgram = function (program) {
 /**
  * Get Programs
  */
-let getPrograms = function () {
+let getPrograms = function (callback = null) {
   swal({
     title: "Por favor espere",
     text: "Cargando programas",
@@ -93,23 +92,25 @@ let getPrograms = function () {
     buttons: false,
     closeOnClickOutside: false,
   });
-  PythonShell.run(`${urlpy}getPrograms.py`, null, function (err, results) {
-    cleanPrograms();
-    if (results) {
-      let programs = JSON.parse(results[0]);
-      for (const key in programs) {
-        const program = programs[key];
-        console.log(program);
-        printProgram(program);
+  PythonShell.run(
+    `${env.urlpy}/programs/get.py`,
+    null,
+    function (err, results) {
+      cleanPrograms();
+      if (results) {
+        programs = JSON.parse(results[0]);
+        for (const key in programs) {
+          const program = programs[key];
+          printProgram(program);
+        }
+        swal.close();
+        if (callback) {
+          callback();
+        }
       }
-      swal.close();      
+      if (err) {
+        console.error(err);
+      }
     }
-    if(err){
-      console.error(err);
-    }
-  });
+  );
 };
-
-document.addEventListener("DOMContentLoaded", function () {
-  getPrograms();
-});

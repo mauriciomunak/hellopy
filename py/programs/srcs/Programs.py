@@ -12,16 +12,17 @@ class Program():
     hour = False
     minutes = False
     message = False
+    type = False
 
     def __init__(self) -> None:
         db = Database('{}/db/database.db'.format(ROOT_DIR))
-        db.exec("CREATE TABLE IF NOT EXISTS hp_programs(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, day INTEGER, idgroup TEXT, hour INTEGER, minutes INTEGER, message TEXT)")
+        db.exec("CREATE TABLE IF NOT EXISTS hp_programs(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, day INTEGER, idgroup TEXT, hour INTEGER, minutes INTEGER, message TEXT, type TEXT)")
 
     def save(self):
         if int(self.countByHourMinuteAndDay()) < 1:
             db = Database('{}/db/database.db'.format(ROOT_DIR))
-            query = "INSERT INTO hp_programs (`name`, `day`, `idgroup`, `hour`, `minutes`, `message`) VALUES ('{}', {}, '{}', {}, {}, '{}')".format(
-                self.name, int(self.day), self.idgroup, int(self.hour), int(self.minutes), self.message)
+            query = "INSERT INTO hp_programs (`name`, `day`, `idgroup`, `hour`, `minutes`, `message`, `type`) VALUES ('{}', {}, '{}', {}, {}, '{}', '{}')".format(
+                self.name, int(self.day), self.idgroup, int(self.hour), int(self.minutes), self.message, self.type)
             result = db.exec(query)
             return True if result != False else False
         else:

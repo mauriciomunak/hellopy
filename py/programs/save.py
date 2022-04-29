@@ -10,6 +10,7 @@ if len(sys.argv) >= 6:
     minutes = int(sys.argv[4])
     name = sys.argv[5]
     day = int(sys.argv[6])
+    type = sys.argv[7]
     try:
         program = Program()
         program.idgroup = id_group
@@ -18,6 +19,7 @@ if len(sys.argv) >= 6:
         program.minutes = minutes
         program.name = name
         program.day = day
+        program.type = type
         saved = program.save()
         print(saved)
     except Exception as e:

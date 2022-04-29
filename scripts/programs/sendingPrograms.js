@@ -3,7 +3,7 @@
  * Sending Program to Data Base Or Sending message directly
  *
  */
-let SendProgram = function () {
+let SendProgram = function (typeMessage = 'whatsapp') {
   //   Información de la programación
   let name = document.getElementById("nameprogram").value;
   let days = Array.prototype.slice
@@ -81,9 +81,9 @@ let SendProgram = function () {
       count++;
       let options = {
         mode: "text",
-        args: [idgroup, message, hour, minutes, name, day],
+        args: [idgroup, message, hour, minutes, name, day, typeMessage],
       };
-      PythonShell.run(`${urlpy}saveProgram.py`, options, function (err, results) {
+      PythonShell.run(`${env.urlpy}/programs/save.py`, options, function (err, results) {
         if (err || (results.length == 1 && results != "True")) {
           errorsval = true;
           if (count == days.length) {
@@ -120,7 +120,7 @@ let SendProgram = function () {
       mode: "text",
       args: [idgroup, message, hour, minutes],
     };
-    PythonShell.run(`${urlpy}sendMessages.py`, options, function (err, results) {
+    PythonShell.run(`${env.urlpy}/whatsapp/send.py`, options, function (err, results) {
       if (err || results.length == 1) {
         swal({
           title: "Lo sentimos",

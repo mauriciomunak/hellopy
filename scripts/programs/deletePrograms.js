@@ -15,7 +15,7 @@ let deleteProgram = function (id) {
     mode: "text",
     args: [id],
   };
-  PythonShell.run(`${urlpy}deleteProgram.py`, options, function (err, results) {
+  PythonShell.run(`${env.urlpy}/programs/delete.py`, options, function (err, results) {
     if (err || (results.length == 1 && results != "True")) {
       swal({
         title: "Lo sentimos",
