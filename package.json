@@ -1,12 +1,12 @@
 {
-  "name": "electron-quick-start",
+  "name": "HelloPY",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "Administrador de mensajes automatizados para WhatsApp.",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/mauriciomunak/hellopy",
   "keywords": [
     "Electron",
     "quick",
@@ -17,7 +17,8 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^18.1.0"
+    "electron": "^18.1.0",
+    "electron-packager": "^15.5.1"
   },
   "dependencies": {
     "python-shell": "^3.0.1"

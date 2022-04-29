@@ -93,15 +93,20 @@ let getPrograms = function () {
     buttons: false,
     closeOnClickOutside: false,
   });
-  PythonShell.run(`./py/getPrograms.py`, null, function (err, results) {
+  PythonShell.run(`${urlpy}getPrograms.py`, null, function (err, results) {
     cleanPrograms();
-    let programs = JSON.parse(results[0]);
-    for (const key in programs) {
-      const program = programs[key];
-      console.log(program);
-      printProgram(program);
+    if (results) {
+      let programs = JSON.parse(results[0]);
+      for (const key in programs) {
+        const program = programs[key];
+        console.log(program);
+        printProgram(program);
+      }
+      swal.close();      
     }
-    swal.close();
+    if(err){
+      console.error(err);
+    }
   });
 };
 

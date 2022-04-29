@@ -83,7 +83,7 @@ let SendProgram = function () {
         mode: "text",
         args: [idgroup, message, hour, minutes, name, day],
       };
-      PythonShell.run(`./py/saveProgram.py`, options, function (err, results) {
+      PythonShell.run(`${urlpy}saveProgram.py`, options, function (err, results) {
         if (err || (results.length == 1 && results != "True")) {
           errorsval = true;
           if (count == days.length) {
@@ -120,7 +120,7 @@ let SendProgram = function () {
       mode: "text",
       args: [idgroup, message, hour, minutes],
     };
-    PythonShell.run(`./py/sendMessages.py`, options, function (err, results) {
+    PythonShell.run(`${urlpy}sendMessages.py`, options, function (err, results) {
       if (err || results.length == 1) {
         swal({
           title: "Lo sentimos",

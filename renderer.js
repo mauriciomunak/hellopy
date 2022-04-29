@@ -4,4 +4,6 @@
 // `nodeIntegration` is turned off. Use `preload.js` to
 // selectively enable features needed in the rendering
 // process.
+const modedevelop = true
 const { PythonShell } = require("python-shell");
+const urlpy = modedevelop ? './py/':'./resources/app/py/'
