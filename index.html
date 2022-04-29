@@ -15,7 +15,7 @@
   <div id="app">
     <div class="p-5 bg-light" style="height: 100vh;">
       <div class="container position-relative">
-        <a class="btn btn-outline-dark position-absolute end-0 align-middle" data-bs-toggle="offcanvas"
+        <a class="btn btn-outline-dark position-absolute end-0 align-middle me-3" data-bs-toggle="offcanvas"
           href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" fill="currentColor" class="bi bi-alarm pb-1"
             viewBox="0 0 16 16">
@@ -25,18 +25,25 @@
           </svg>
           Programaciones
         </a>
-        <h1 class="display-3">
+        <h1 class="fs-3 pb-3 pt-3">
           <strong>
-            Welcome to HelloPY
+            Bienvenido to HelloPY
           </strong>
         </h1>
-        <p class="lead">Bienvenido a HelloPy</p>
-        <hr class="my-4">
-        <p class="lead fs-5">Por favor ingresa lo días, el número o el id del grupo al que le deseas envíar el mensaje, luego el
+        <p class="lead fs-6">Por favor ingresa lo días, el número o el id del grupo al que le deseas envíar el mensaje,
+          luego el
           mensaje, la hora y el minuto exacto del mismo.</p>
         <div class="row">
           <div class="col-sm-12">
-            <div class="mb-3">
+            <div class="mb-4">
+              <label for="nameprogram" class="form-label">Nombre:</label>
+              <input type="text"
+                class="form-control" name="nameprogram" id="nameprogram" aria-describedby="nameprogramhelp" placeholder="">
+              <small id="nameprogramhelp" class="form-text text-danger position-absolute pt-0"></small>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="mb-4">
               <label for="daystosend" class="form-label">Activar en los días:</label>
               <select multiple class="form-select" name="daystosend" id="daystosend">
                 <option value="1">Lunes</option>
@@ -50,29 +57,29 @@
             </div>
           </div>
           <div class="col-sm-6">
-            <div class="mb-3">
+            <div class="mb-4">
               <label for="idtosend" class="form-label">Número o id del grupo:</label>
               <input type="text" class="form-control" name="idtosend" id="idtosend" aria-describedby="idtosendhelp"
                 placeholder="">
-              <small id="idtosendhelp" class="form-text text-danger"></small>
+              <small id="idtosendhelp" class="form-text text-danger position-absolute pt-0"></small>
             </div>
           </div>
           <div class="col-sm-6">
-            <div class="mb-3">
+            <div class="mb-4">
               <label for="timehour" class="form-label">Hora:</label>
               <input type="time" class="form-control" name="timehour" id="timehour" aria-describedby="timehourhelp"
                 placeholder="">
-              <small id="timehourhelp" class="form-text text-muted"></small>
+              <small id="timehourhelp" class="form-text text-danger position-absolute"></small>
             </div>
           </div>
           <div class="col-sm-12">
-            <div class="mb-3">
+            <div class="mb-4">
               <label for="messagetosend" class="form-label">Mensaje:</label>
               <textarea class="form-control" name="messagetosend" id="messagetosend" rows="3"></textarea>
             </div>
           </div>
         </div>
-        <a name="" id="" class="btn btn-info text-light position-absolute end-0" role="button">Programar mensaje</a>
+        <button id="btnSendMensaje" class="btn btn-info text-light position-absolute end-0 me-3" role="button">Programar mensaje</button>
       </div>
     </div>
 
@@ -101,8 +108,10 @@
   </div>
 
   <script src="./assets/bootstrap-5.1.3/js/bootstrap.min.js"></script>
+  <script src="./assets/sweetalert.min.js"></script>
   <!-- You can also require other files to run in this process -->
   <script src="./renderer.js"></script>
+  <script src="./scripts/sendingPrograms.js"></script>
 </body>
 
 </html>

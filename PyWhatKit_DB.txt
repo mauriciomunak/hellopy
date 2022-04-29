@@ -1,0 +1,20 @@
+Date: 28/4/2022
+Time: 21:19
+Group ID: Kcti8ujnusV2g0ouqhQTho
+Message: Hola
+--------------------
+Date: 28/4/2022
+Time: 22:15
+Group ID: Kcti8ujnusV2g0ouqhQTho
+Message: HOla
+--------------------
+Date: 28/4/2022
+Time: 22:16
+Group ID: Kcti8ujnusV2g0ouqhQTho
+Message: Hola
+--------------------
+Date: 28/4/2022
+Time: 22:33
+Group ID: Kcti8ujnusV2g0ouqhQTho
+Message: Prueba 2
+--------------------
