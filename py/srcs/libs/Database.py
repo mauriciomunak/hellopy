@@ -15,8 +15,7 @@ class Database():
         return result
     
     def select(self, query):
-        self.shot.execute(query)
-        result = self.shot.fetchall()
+        result = self.shot.execute(query).fetchall()
         self.conext.commit()
         self.conext.close()
         return result

@@ -23,9 +23,16 @@ class Program():
             query = "INSERT INTO hp_programs (`name`, `day`, `idgroup`, `hour`, `minutes`, `message`) VALUES ('{}', {}, '{}', {}, {}, '{}')".format(
                 self.name, int(self.day), self.idgroup, int(self.hour), int(self.minutes), self.message)
             result = db.exec(query)
-            return  True if result != False else False 
+            return True if result != False else False
         else:
             return False
+
+    def delete(self):
+        db = Database('{}/db/database.db'.format(ROOT_DIR))
+        query = "DELETE FROM hp_programs WHERE id = {}".format(
+            int(self.id))
+        result = db.exec(query)
+        return True if result != False else False
 
     def countByHourMinuteAndDay(self):
         db = Database('{}/db/database.db'.format(ROOT_DIR))
@@ -35,4 +42,4 @@ class Program():
 
     def findAll(self):
         db = Database('{}/db/database.db'.format(ROOT_DIR))
-        return db.exec("SELECT * FROM hp_programs")
+        return db.select("SELECT * FROM hp_programs ORDER BY day, id")

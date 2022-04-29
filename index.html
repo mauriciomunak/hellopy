@@ -85,8 +85,8 @@
 
 
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-      <div class="container pt-2">
-        <div class="offcanvas-header">
+      <div class="" style="max-height: 100vh; overflow: auto">
+        <div class="offcanvas-header sticky-top px-5 pt-3 bg-light">
           <h5 class="offcanvas-title" id="offcanvasExampleLabel">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" fill="currentColor" class="bi bi-alarm pb-1"
               viewBox="0 0 16 16">
@@ -96,12 +96,9 @@
             </svg>
             Programaciones
           </h5>
-          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-          <div>
-            Aquí tienes tus programaciones almacenadas, toca para editar o eliminar.
-          </div>
+          <div id="programsPrint"></div>
         </div>
       </div>
     </div>
@@ -111,7 +108,9 @@
   <script src="./assets/sweetalert.min.js"></script>
   <!-- You can also require other files to run in this process -->
   <script src="./renderer.js"></script>
+  <script src="./scripts/deletePrograms.js"></script>
   <script src="./scripts/sendingPrograms.js"></script>
+  <script src="./scripts/getPrograms.js"></script>
 </body>
 
 </html>

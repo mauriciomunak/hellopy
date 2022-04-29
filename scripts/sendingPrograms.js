@@ -1,11 +1,9 @@
-var { PythonShell } = require("python-shell");
-
 /**
  *
- * Sending Program to Data Base
+ * Sending Program to Data Base Or Sending message directly
  *
  */
-let hpSendProgram = function () {
+let SendProgram = function () {
   //   Información de la programación
   let name = document.getElementById("nameprogram").value;
   let days = Array.prototype.slice
@@ -14,10 +12,9 @@ let hpSendProgram = function () {
       return v.value;
     });
   let idgroup = document.getElementById("idtosend").value;
-  let hour = parseInt(document.getElementById("timehour").value.split(":")[0]);
-  let minutes = parseInt(
-    document.getElementById("timehour").value.split(":")[1]
-  );
+  let hourcomp = document.getElementById("timehour").value;
+  let hour = parseInt(hourcomp.split(":")[0]);
+  let minutes = parseInt(hourcomp.split(":")[1]);
   let message = document.getElementById("messagetosend").value;
 
   //   Cajas de texto para control de errores
@@ -42,7 +39,7 @@ let hpSendProgram = function () {
     } else {
       help_idgroup.innerHTML = "";
     }
-    if (!hour) {
+    if (!hourcomp) {
       help_hour.innerHTML = "Por favor llene este campo";
       error_active = true;
     } else {
@@ -68,7 +65,8 @@ let hpSendProgram = function () {
   if (error_active) {
     return false;
   }
-
+  //   Sí no se escoge día para envío se envía el mensaje directamente
+  //   En caso de que se envien días se programará desde la base
   if (days.length > 0) {
     swal({
       title: "Por favor espere",
@@ -77,20 +75,26 @@ let hpSendProgram = function () {
       closeOnClickOutside: false,
       buttons: false,
     });
+    count = 0;
+    errorsval = false;
     days.forEach((day) => {
+      count++;
       let options = {
         mode: "text",
         args: [idgroup, message, hour, minutes, name, day],
       };
       PythonShell.run(`./py/saveProgram.py`, options, function (err, results) {
-        if (err || (results.length == 1 && results != 'True')) {
-          swal({
-            title: "Lo sentimos",
-            text: `Hubo un error en la programación. ${results[0]}`,
-            icon: "error",
-            button: "De acuerdo",
-          });
-          console.error(err);
+        if (err || (results.length == 1 && results != "True")) {
+          errorsval = true;
+          if (count == days.length) {
+              swal({
+                title: "Lo sentimos",
+                text: `Hubiero errores en la programación. Por favor rectifique en el botón Programaciones`,
+                icon: "error",
+                button: "De acuerdo",
+              });
+              console.error(err);              
+          }
         } else {
           // results is an array consisting of messages collected during execution
           swal({
@@ -100,6 +104,7 @@ let hpSendProgram = function () {
             button: "De acuerdo",
           });
           console.log("response: ", results);
+          getPrograms();
         }
       });
     });
@@ -140,5 +145,5 @@ let hpSendProgram = function () {
 
 let btnSendMensaje = document.getElementById("btnSendMensaje");
 btnSendMensaje.addEventListener("click", () => {
-  hpSendProgram();
+  SendProgram();
 });
