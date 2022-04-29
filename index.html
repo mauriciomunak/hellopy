@@ -1,19 +1,108 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
-    <link href="./styles.css" rel="stylesheet">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
 
-    <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+  <link href="./styles.css" rel="stylesheet">
+  <title>HelloPY</title>
+  <link rel="stylesheet" href="./assets/bootstrap-5.1.3/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="p-5 bg-light" style="height: 100vh;">
+      <div class="container position-relative">
+        <a class="btn btn-outline-dark position-absolute end-0 align-middle" data-bs-toggle="offcanvas"
+          href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" fill="currentColor" class="bi bi-alarm pb-1"
+            viewBox="0 0 16 16">
+            <path d="M8.5 5.5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5z" />
+            <path
+              d="M6.5 0a.5.5 0 0 0 0 1H7v1.07a7.001 7.001 0 0 0-3.273 12.474l-.602.602a.5.5 0 0 0 .707.708l.746-.746A6.97 6.97 0 0 0 8 16a6.97 6.97 0 0 0 3.422-.892l.746.746a.5.5 0 0 0 .707-.708l-.601-.602A7.001 7.001 0 0 0 9 2.07V1h.5a.5.5 0 0 0 0-1h-3zm1.038 3.018a6.093 6.093 0 0 1 .924 0 6 6 0 1 1-.924 0zM0 3.5c0 .753.333 1.429.86 1.887A8.035 8.035 0 0 1 4.387 1.86 2.5 2.5 0 0 0 0 3.5zM13.5 1c-.753 0-1.429.333-1.887.86a8.035 8.035 0 0 1 3.527 3.527A2.5 2.5 0 0 0 13.5 1z" />
+          </svg>
+          Programaciones
+        </a>
+        <h1 class="display-3">
+          <strong>
+            Welcome to HelloPY
+          </strong>
+        </h1>
+        <p class="lead">Bienvenido a HelloPy</p>
+        <hr class="my-4">
+        <p class="lead fs-5">Por favor ingresa lo días, el número o el id del grupo al que le deseas envíar el mensaje, luego el
+          mensaje, la hora y el minuto exacto del mismo.</p>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="mb-3">
+              <label for="daystosend" class="form-label">Activar en los días:</label>
+              <select multiple class="form-select" name="daystosend" id="daystosend">
+                <option value="1">Lunes</option>
+                <option value="2">Martes</option>
+                <option value="3">Miercoles</option>
+                <option value="4">Jueves</option>
+                <option value="5">Viernes</option>
+                <option value="6">Sábado</option>
+                <option value="7">Domingo</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="mb-3">
+              <label for="idtosend" class="form-label">Número o id del grupo:</label>
+              <input type="text" class="form-control" name="idtosend" id="idtosend" aria-describedby="idtosendhelp"
+                placeholder="">
+              <small id="idtosendhelp" class="form-text text-danger"></small>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="mb-3">
+              <label for="timehour" class="form-label">Hora:</label>
+              <input type="time" class="form-control" name="timehour" id="timehour" aria-describedby="timehourhelp"
+                placeholder="">
+              <small id="timehourhelp" class="form-text text-muted"></small>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="mb-3">
+              <label for="messagetosend" class="form-label">Mensaje:</label>
+              <textarea class="form-control" name="messagetosend" id="messagetosend" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+        <a name="" id="" class="btn btn-info text-light position-absolute end-0" role="button">Programar mensaje</a>
+      </div>
+    </div>
+
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <div class="container pt-2">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" fill="currentColor" class="bi bi-alarm pb-1"
+              viewBox="0 0 16 16">
+              <path d="M8.5 5.5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5z" />
+              <path
+                d="M6.5 0a.5.5 0 0 0 0 1H7v1.07a7.001 7.001 0 0 0-3.273 12.474l-.602.602a.5.5 0 0 0 .707.708l.746-.746A6.97 6.97 0 0 0 8 16a6.97 6.97 0 0 0 3.422-.892l.746.746a.5.5 0 0 0 .707-.708l-.601-.602A7.001 7.001 0 0 0 9 2.07V1h.5a.5.5 0 0 0 0-1h-3zm1.038 3.018a6.093 6.093 0 0 1 .924 0 6 6 0 1 1-.924 0zM0 3.5c0 .753.333 1.429.86 1.887A8.035 8.035 0 0 1 4.387 1.86 2.5 2.5 0 0 0 0 3.5zM13.5 1c-.753 0-1.429.333-1.887.86a8.035 8.035 0 0 1 3.527 3.527A2.5 2.5 0 0 0 13.5 1z" />
+            </svg>
+            Programaciones
+          </h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <div>
+            Aquí tienes tus programaciones almacenadas, toca para editar o eliminar.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./assets/bootstrap-5.1.3/js/bootstrap.min.js"></script>
+  <!-- You can also require other files to run in this process -->
+  <script src="./renderer.js"></script>
+</body>
+
 </html>
