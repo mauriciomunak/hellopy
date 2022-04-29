@@ -121,6 +121,9 @@ let SendProgram = function (typeMessage = 'whatsapp') {
       args: [idgroup, message, hour, minutes],
     };
     PythonShell.run(`${env.urlpy}/whatsapp/send.py`, options, function (err, results) {
+      if (env.dev) {
+        console.log(results);
+      }
       if (err || results.length == 1) {
         swal({
           title: "Lo sentimos",

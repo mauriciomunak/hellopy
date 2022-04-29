@@ -56,7 +56,6 @@ let runPrograms = function () {
 let cronPrograms = function () {
   setInterval(
     function () {
-      console.log("Program");
       runPrograms();
     },
     env.crontime ? env.crontime * 60000 : 60000

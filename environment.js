@@ -3,5 +3,6 @@
 const modedevelop = false;
 
 const env = {
+  dev: modedevelop,
   urlpy: modedevelop ? "./py/" : "./resources/app/py/",
 };
