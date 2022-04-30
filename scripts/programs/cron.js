@@ -15,7 +15,7 @@ let runPrograms = function () {
         program[2] == day &&
         program[4] == current.getHours() &&
         diferenceminutes >= 0 &&
-        diferenceminutes < 5
+        diferenceminutes <= 2
       ) {
         let options = {
           mode: "text",

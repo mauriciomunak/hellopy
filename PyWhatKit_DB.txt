@@ -18,3 +18,8 @@ Time: 16:13
 Group ID: Kcti8ujnusV2g0ouqhQTho
 Message: 1
 --------------------
+Date: 29/4/2022
+Time: 16:32
+Group ID: Kcti8ujnusV2g0ouqhQTho
+Message: Prueba 433
+--------------------

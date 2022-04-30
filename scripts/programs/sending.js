@@ -3,7 +3,7 @@
  * Sending Program to Data Base Or Sending message directly
  *
  */
-let SendProgram = function (typeMessage = 'whatsapp') {
+let SendProgram = function (typeMessage = "whatsapp") {
   //   Información de la programación
   let name = document.getElementById("nameprogram").value;
   let days = Array.prototype.slice
@@ -22,10 +22,18 @@ let SendProgram = function (typeMessage = 'whatsapp') {
   let help_days = document.getElementById("daystosendhelp");
   let help_idgroup = document.getElementById("idtosendhelp");
   let help_hour = document.getElementById("timehourhelp");
-  let help_minutes = document.getElementById("timehourhelp");
   let help_message = document.getElementById("messagetosendhelp");
   let error_active = false;
-
+  let current = new Date();
+  if (
+    hour <= current.getHours() &&
+    minutes < current.getMinutes() + 2 &&
+    days.length == 0
+  ) {
+    help_hour.innerHTML =
+      "Puede crear programaciones para hoy con mínimo dos minutos de anticipación";
+    return false;
+  }
   if (!name || !idgroup || !hour) {
     if (!name) {
       help_name.innerHTML = "Por favor ingrese un nombre";
@@ -83,30 +91,34 @@ let SendProgram = function (typeMessage = 'whatsapp') {
         mode: "text",
         args: [idgroup, message, hour, minutes, name, day, typeMessage],
       };
-      PythonShell.run(`${env.urlpy}/programs/save.py`, options, function (err, results) {
-        if (err || (results.length == 1 && results != "True")) {
-          errorsval = true;
-          if (count == days.length) {
+      PythonShell.run(
+        `${env.urlpy}/programs/save.py`,
+        options,
+        function (err, results) {
+          if (err || (results.length == 1 && results != "True")) {
+            errorsval = true;
+            if (count == days.length) {
               swal({
                 title: "Lo sentimos",
                 text: `Hubiero errores en la programación. Por favor rectifique en el botón Programaciones`,
                 icon: "error",
                 button: "De acuerdo",
               });
-              console.error(err);              
+              console.error(err);
+            }
+          } else {
+            // results is an array consisting of messages collected during execution
+            swal({
+              title: "Listo",
+              text: "Se ha programado correctamente",
+              icon: "success",
+              button: "De acuerdo",
+            });
+            console.log("response: ", results);
+            getPrograms();
           }
-        } else {
-          // results is an array consisting of messages collected during execution
-          swal({
-            title: "Listo",
-            text: "Se ha programado correctamente",
-            icon: "success",
-            button: "De acuerdo",
-          });
-          console.log("response: ", results);
-          getPrograms();
         }
-      });
+      );
     });
   } else {
     swal({
@@ -120,29 +132,33 @@ let SendProgram = function (typeMessage = 'whatsapp') {
       mode: "text",
       args: [idgroup, message, hour, minutes],
     };
-    PythonShell.run(`${env.urlpy}/whatsapp/send.py`, options, function (err, results) {
-      if (env.dev) {
-        console.log(results);
+    PythonShell.run(
+      `${env.urlpy}/whatsapp/send.py`,
+      options,
+      function (err, results) {
+        if (env.dev) {
+          console.log(results);
+        }
+        if (err || results.length == 1) {
+          swal({
+            title: "Lo sentimos",
+            text: "Hubo un error en la programación",
+            icon: "error",
+            button: "De acuerdo",
+          });
+          console.error(err);
+        } else {
+          // results is an array consisting of messages collected during execution
+          swal({
+            title: "Listo",
+            text: "Se ha programado correctamente",
+            icon: "success",
+            button: "De acuerdo",
+          });
+          console.log("response: ", results);
+        }
       }
-      if (err || results.length == 1) {
-        swal({
-          title: "Lo sentimos",
-          text: "Hubo un error en la programación",
-          icon: "error",
-          button: "De acuerdo",
-        });
-        console.error(err);
-      } else {
-        // results is an array consisting of messages collected during execution
-        swal({
-          title: "Listo",
-          text: "Se ha programado correctamente",
-          icon: "success",
-          button: "De acuerdo",
-        });
-        console.log("response: ", results);
-      }
-    });
+    );
   }
 };
 

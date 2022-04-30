@@ -1,11 +1,11 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
-
+const { env } = require("./environment.js");
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    minWidth: 1200,
+    minWidth: env.dev ? 1200 : 900,
     minHeight: 820,
     webPreferences: {
       nodeIntegration: true,
@@ -16,13 +16,17 @@ function createWindow() {
   });
 
   // Remove menu
-  mainWindow.setMenu(null);
+  if (!env.dev) {
+    mainWindow.setMenu(null);
+  }
 
   // and load the index.html of the app.
   mainWindow.loadFile("index.html");
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  if (env.dev) {
+    mainWindow.webContents.openDevTools();
+  }
 }
 
 // This method will be called when Electron has finished

@@ -7,7 +7,7 @@ import os
 
 if len(sys.argv) >= 4:
     # CLose all tabs
-    os.system("taskkill /im chrome.exe /f")
+    # os.system("taskkill /im chrome.exe /f")
 
     # MacOS
     # chrome_path = 'open -a /Applications/Google\ Chrome.app %s'
